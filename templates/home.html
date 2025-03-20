@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Harvester Head Performance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- font from google (poppins font style regular 400 and semi 600 used here) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+
+
+<body>
+
+    <header>
+        <a href="#" class="header">Forest Harvester Head Performance</a>
+    </header>
+
+    <div class="main">
+
+        <div class="line-chart">
+            <select id="parameterSelect" onchange="updateChart()">
+                <option value="hydraulicPressure">Hydraulic Pressure (bar)</option>
+                <option value="oilTemperature">Hydraulic Oil Temperature (°C)</option>
+                <option value="sawBladeRPM">Saw Blade RPM</option>
+                <option value="fuelConsumption">Fuel Consumption (L/hour)</option>
+                <option value="bladeSharpness">Blade Sharpness Level (%)</option>
+            </select>
+
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="status-and-alert">
+
+            <div class="status">
+                <h3>Status Table</h3>
+                <table>
+                    <tr>
+                        <th>Hydraulic Pressure (bar)</th>
+                        <td>290</td>
+                        <td><span class="status-light green"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Hydraulic Oil Temperature (°C)</th>
+                        <td>75</td>
+                        <td><span class="status-light green"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Saw Blade RPM</th>
+                        <td>2600</td>
+                        <td><span class="status-light green"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Fuel Consumption (L/hour)</th>
+                        <td>22</td>
+                        <td><span class="status-light yellow"></span></td>
+                    </tr>
+                    <tr>
+                        <th>Blade Sharpness Level (%)</th>
+                        <td>50</td>
+                        <td><span class="status-light red"></span></td>
+                    </tr>
+                </table>
+            </div>
+        
+            <div class="alert">
+                <h3>Prediction Model Alert</h3>
+                <div class="alert-dynamic">
+                    <h3 id="alert-message">Maintenance Due!</h3>
+                    <h4>Confidence Level</h4>
+                    <h4>85%</h4>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const dataSets = {
+            hydraulicPressure: [170, 190, 210, 230, 250, 270, 290],
+            oilTemperature: [25, 35, 45, 55, 60, 70, 75],
+            sawBladeRPM: [700, 900, 1300, 1800, 2200, 2600],
+            fuelConsumption: [8, 12, 14, 17, 19, 22],
+            bladeSharpness: [100, 85, 80, 70, 60, 50]
+        };
+        
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['t-5', 't-4', 't-3', 't-2', 't-1', 't'],
+                datasets: [{
+                    label: 'Hydraulic Pressure (bar)',
+                    data: dataSets.hydraulicPressure,
+                    borderColor: 'blue',
+                    borderWidth: 3,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                onClick: () => cycleParameter(),
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                        display: true,
+                        text: 'time (hrs)',
+                        color: 'black',
+                        font: {
+                            size: 13
+                        }
+                    },
+                    ticks: {
+                    color: 'black' 
+                }
+                },
+                y: {
+                beginAtZero: true,
+                title: {
+                    font:{
+                        color: 'black',
+                    }
+                },
+                ticks: {
+                    color: 'black' 
+                }
+            }
+        }}
+        });
+
+        function updateChart() {
+            const selectedParam = document.getElementById('parameterSelect').value;
+            chart.data.datasets[0].data = dataSets[selectedParam];
+            chart.data.datasets[0].label = document.getElementById('parameterSelect').selectedOptions[0].text;
+            chart.update();
+        }
+
+        function cycleParameter() {
+            let options = document.getElementById('parameterSelect').options;
+            let selectedIndex = document.getElementById('parameterSelect').selectedIndex;
+            let nextIndex = (selectedIndex + 1) % options.length;
+            document.getElementById('parameterSelect').selectedIndex = nextIndex;
+            updateChart();
+        }
+    </script>
+</body>
+
+</html>

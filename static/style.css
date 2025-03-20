@@ -1,0 +1,119 @@
+:root {
+ --text-color: rgb(28, 27, 27);
+ --background-color: rgb(231, 231, 231);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    padding: 0 2rem;
+    height: 4rem; /* height of the nav */
+    align-items: center; 
+    
+    background-color: rgba(17, 87, 201, 0.95);
+
+    position: fixed;
+    z-index: 1000;
+}
+
+.header{
+    color: var(--background-color);
+    font-size: x-large;
+    font-weight: 600;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    padding: 3.5rem 1.5rem; /* y and x-axis, respectively */
+    background-color: var(--background-color);
+}
+
+canvas {
+    min-width: 40vw;
+    max-width: 45vw;
+    min-height: 40vh;
+    max-height: 45vh;
+    margin: auto;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem 1rem; 
+}
+.status-and-alert{
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem; 
+}
+
+.status{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: solid 0.2rem var(--text-color);
+    border-radius: 1rem; 
+    min-width: 40vw;
+
+}
+
+table{
+    min-width: 35vw;
+}
+th{padding-left: 0.5rem;padding-bottom: 0.5rem; text-align: left;}
+td{padding-left: 0.5rem;padding-bottom: 0.5rem;}
+
+.status-light {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.green { background-color: green; }
+.red { background-color: red; }
+.yellow { background-color: yellow; }
+
+.alert{
+    border: solid 0.2rem var(--text-color);
+    border-radius: 1rem; 
+    min-width: 40vw;
+    align-items: center;
+}
+.alert-dynamic{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2rem;
+}
+#alert-message{
+    color: darkorange;
+}
+
+
+a {
+    text-decoration: none;
+}
+
