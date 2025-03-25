@@ -31,7 +31,7 @@ def predict():
         Fuel_Consumption.append(random.randint(10,24))
         Blade_Sharpness_Level.append(random.randint(29,100))
         i += 1
-    print(Hydraulic_Pressure)
+
     # the sensor_array only takes last datapoint of each parameter to make an array fed to the prediction model and relevant color translation 
     sensor_array = [Hydraulic_Pressure[4], Hydraulic_Oil_Temperature[4], Saw_Blade_RPM[4], Fuel_Consumption[4], Blade_Sharpness_Level[4]]
     sensor_data = np.array([sensor_array]) # convert to np array for inputting this to xgboost model
