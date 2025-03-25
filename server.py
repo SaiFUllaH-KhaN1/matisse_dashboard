@@ -42,7 +42,7 @@ def predict():
     confidence_numpy = model.predict_proba(sensor_data) # gives numpy array of probabilities/confidence value of the predicted class
     confidence_array = (confidence_numpy.flatten()) # convert numpy array to normal array
     confidence = max(confidence_array) # largest value which has been selected as output of the class predicted by the model
-    confidence = f"{confidence*100:.2f}" # percentage output
+    confidence = f"{confidence*100:.1f}" # percentage output
 
     # here prediction is an int value predicted by the model as 0, 1 or 2. So we translate it to a readable message 
     if prediction == 0:
